@@ -1,4 +1,4 @@
-package com.example.readysetgo
+package com.readysetgo.readysetgo
 
 import org.junit.Test
 

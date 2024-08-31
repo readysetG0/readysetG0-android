@@ -1,4 +1,4 @@
-package com.example.readysetgo
+package com.readysetgo.readysetgo
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

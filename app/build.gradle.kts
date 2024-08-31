@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.readysetgo"
+    namespace = "com.readysetgo.readysetgo"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.readysetgo"
+        applicationId = "com.readysetgo.readysetgo"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
