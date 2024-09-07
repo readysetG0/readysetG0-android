@@ -2,4 +2,6 @@
     <string name="app_name">readysetGo</string>
     <string name="webview_url">http://localhost:3000</string>
     <string name="internet_permission_needed">앱을 사용하려면 인터넷 권한을 허용해주세요</string>
+    <string name="cancel">취소</string>
+    <string name="agree">동의</string>
 </resources>

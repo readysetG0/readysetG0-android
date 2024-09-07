@@ -14,7 +14,10 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -24,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainWebView: WebView
-    private val REQUEST_CODE_INTERNET_PERMISSION = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +51,8 @@ class MainActivity : AppCompatActivity() {
 
         when (requestCode) {
             REQUEST_CODE_INTERNET_PERMISSION -> {
-                if ((grantResults.isNotEmpty()
-                            && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     initMainWebView()
                 } else {
                     Toast.makeText(
@@ -58,7 +60,6 @@ class MainActivity : AppCompatActivity() {
                         resources.getString(R.string.internet_permission_needed),
                         Toast.LENGTH_SHORT
                     ).show()
-                    finish()
                 }
             } else -> {
                 // 다른 요청 무시
@@ -77,15 +78,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkInternetPermission() {
-        // TODO : 인터넷 권한 미허용시 동작 고민.. (앱 종료 OR native 에러 페이지?)
         when {
-            ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
-                    == PackageManager.PERMISSION_GRANTED -> {
-                        initMainWebView()
-                    }
-            else -> {
-                requestPermissions(arrayOf(Manifest.permission.INTERNET), REQUEST_CODE_INTERNET_PERMISSION)
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.INTERNET
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                initMainWebView()
             }
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                this,
+                Manifest.permission.INTERNET
+            ) -> {
+                showRequestPermissionRationale()
+            }
+            else -> {
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.INTERNET),
+                    REQUEST_CODE_INTERNET_PERMISSION)
+            }
+        }
+    }
+
+    private fun showRequestPermissionRationale() {
+        AlertDialog.Builder(this).apply {
+            setMessage(resources.getString(R.string.internet_permission_needed))
+            setNegativeButton(resources.getString(R.string.cancel)) { _, _ ->
+                finish()
+            }
+            setPositiveButton(resources.getString(R.string.agree)) { _, _ ->
+
+            }
+
         }
     }
 
@@ -94,4 +117,7 @@ class MainActivity : AppCompatActivity() {
 //
 //    }
 
+    companion object {
+        const val REQUEST_CODE_INTERNET_PERMISSION = 200
+    }
 }
