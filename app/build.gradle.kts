@@ -1,7 +1,13 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
+
+val localProperties = Properties()
+localProperties.load(FileInputStream(rootProject.file("local.properties")))
 
 android {
     namespace = "com.readysetgo.readysetgo"
@@ -18,6 +24,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "WEBVIEW_URL", localProperties["WEBVIEW_URL"] as String)
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -34,6 +43,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 }

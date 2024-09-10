@@ -73,7 +73,8 @@ class MainActivity : AppCompatActivity() {
             mainWebView = this
             settings.javaScriptEnabled = true
 //            webViewClient = MainWebViewClient()
-            loadUrl(resources.getString(R.string.webview_url))
+//            loadUrl(resources.getString(R.string.webview_url))
+            loadUrl(BuildConfig.WEBVIEW_URL)
         }
     }
 
