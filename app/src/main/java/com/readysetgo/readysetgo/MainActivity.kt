@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {
+            // TODO : 인터넷 권한은 일반권한.. 런타임 요청 필요 없음. 다른 권한 요청에 사용하고 인터넷을 삭제하기
             REQUEST_CODE_INTERNET_PERMISSION -> {
                 if ((grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -72,8 +73,7 @@ class MainActivity : AppCompatActivity() {
         binding.mainWebView.apply {
             mainWebView = this
             settings.javaScriptEnabled = true
-//            webViewClient = MainWebViewClient()
-//            loadUrl(resources.getString(R.string.webview_url))
+            addJavascriptInterface(WebAppInterface(this@MainActivity), "Android")
             loadUrl(BuildConfig.WEBVIEW_URL)
         }
     }
@@ -112,11 +112,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
-    // TODO : WebViewClient, WebChromeClient 추가
-//    inner class MainWebViewClient : WebViewClient() {
-//
-//    }
 
     companion object {
         const val REQUEST_CODE_INTERNET_PERMISSION = 200
