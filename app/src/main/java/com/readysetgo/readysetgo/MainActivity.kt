@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainWebView: WebView
+    private lateinit var webAppInterface: WebAppInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +63,16 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            } else -> {
+            }
+
+            PermissionRequestCode.GEO.code -> {
+
+            }
+
+            PermissionRequestCode.GPS.code -> {
+
+            }
+            else -> {
                 // 다른 요청 무시
             }
         }
@@ -70,10 +80,15 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initMainWebView() {
+        webAppInterface = WebAppInterface(this)
+
         binding.mainWebView.apply {
             mainWebView = this
             settings.javaScriptEnabled = true
-            addJavascriptInterface(WebAppInterface(this@MainActivity), "Android")
+            addJavascriptInterface(webAppInterface, "Android")
+
+            webChromeClient = MainWebChromeClient(webAppInterface)
+
             loadUrl(BuildConfig.WEBVIEW_URL)
         }
     }
