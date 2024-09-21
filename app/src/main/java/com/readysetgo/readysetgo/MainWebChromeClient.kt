@@ -9,10 +9,5 @@ class MainWebChromeClient(private val webAppInterface : WebAppInterface) : WebCh
         callback: GeolocationPermissions.Callback?
     ) {
         super.onGeolocationPermissionsShowPrompt(origin, callback)
-
-        if (!webAppInterface.checkGeoPermission()) {
-            webAppInterface.requestGeoPermission()
-        }
-        callback?.invoke(origin, true, false)
     }
 }
