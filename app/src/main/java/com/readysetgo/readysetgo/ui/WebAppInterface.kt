@@ -1,4 +1,4 @@
-package com.readysetgo.readysetgo
+package com.readysetgo.readysetgo.ui
 
 import android.Manifest
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.webkit.JavascriptInterface
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.readysetgo.readysetgo.PermissionRequestCode
 
 class WebAppInterface(private val mContext: Context, private val activity: MainActivity) {
     @JavascriptInterface

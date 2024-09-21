@@ -1,4 +1,4 @@
-package com.readysetgo.readysetgo
+package com.readysetgo.readysetgo.ui
 
 import android.webkit.GeolocationPermissions
 import android.webkit.WebChromeClient

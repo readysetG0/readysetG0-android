@@ -1,4 +1,4 @@
-package com.readysetgo.readysetgo
+package com.readysetgo.readysetgo.ui
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -9,6 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.readysetgo.readysetgo.BuildConfig
+import com.readysetgo.readysetgo.PermissionRequestCode
+import com.readysetgo.readysetgo.R
 import com.readysetgo.readysetgo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
