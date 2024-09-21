@@ -4,6 +4,9 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    // ksp
+    id("com.google.devtools.ksp")
 }
 
 val localProperties = Properties()
@@ -49,6 +52,12 @@ android {
 }
 
 dependencies {
+
+    // room
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
 
     // webview
     implementation("androidx.webkit:webkit:1.8.0")
