@@ -7,6 +7,9 @@ plugins {
 
     // ksp
     id("com.google.devtools.ksp")
+
+    // kotlinx.serialization
+    kotlin("plugin.serialization") version "2.0.20"
 }
 
 val localProperties = Properties()
@@ -52,6 +55,9 @@ android {
 }
 
 dependencies {
+
+    // kotlinx-serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
     // room
     val room_version = "2.6.1"
