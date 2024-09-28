@@ -4,6 +4,12 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    // ksp
+    id("com.google.devtools.ksp")
+
+    // kotlinx.serialization
+    kotlin("plugin.serialization") version "2.0.20"
 }
 
 val localProperties = Properties()
@@ -49,6 +55,15 @@ android {
 }
 
 dependencies {
+
+    // kotlinx-serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+    // room
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
 
     // webview
     implementation("androidx.webkit:webkit:1.8.0")
