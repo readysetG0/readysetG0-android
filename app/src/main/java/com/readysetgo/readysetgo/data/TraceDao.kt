@@ -7,14 +7,14 @@ import androidx.room.Query
 
 @Dao
 interface TraceDao {
-    @Query("SELECT * FROM trace")
-    fun getAllTrace(): List<Trace>
+    @Query("SELECT * FROM trace WHERE travel_info_id = :travelInfoId")
+    fun selectAllTrace(travelInfoId: Long): List<Trace>
 
-    @Query("SELECT * FROM trace WHERE day = (:day)")
-    fun getTraceByUserId(day: Int): Trace
+    @Query("SELECT * FROM trace WHERE travel_info_id = :travelInfoId AND day = :day")
+    fun selectTraceByDay(travelInfoId: Long, day: Int): List<Trace>
 
     @Insert
-    fun insertTrace(trace: Trace)
+    fun insertTraceList(traceList: List<Trace>): List<Long>
 
     @Delete
     fun deleteTrace(trace: Trace)
